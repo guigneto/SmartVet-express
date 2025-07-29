@@ -1,0 +1,77 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+# Arquivo .gitignore para um projeto React + Vite
+
+# Ignorar dependências
+# O diretório node_modules contém todos os pacotes de terceiros.
+# Ele pode ser recriado executando 'npm install', 'pnpm install' ou 'yarn'.
+/node_modules
+
+# Ignorar builds de produção
+# O diretório 'dist' é o diretório de saída padrão para builds do Vite.
+# Se você configurou um nome diferente (ex: 'build'), altere aqui.
+/dist
+/build
+
+# Ignorar arquivos de ambiente locais
+# Estes arquivos contêm variáveis de ambiente específicas da sua máquina local
+# e não devem ser compartilhados. Isso inclui chaves de API, senhas de banco de dados, etc.
+# Use .env.example para fornecer um modelo para outros desenvolvedores.
+.env.local
+.env.*.local
+
+# Arquivos de log
+# Estes arquivos são gerados para fins de depuração e não precisam ser versionados.
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Arquivos de cache
+# Arquivos de cache de ferramentas de desenvolvimento para melhorar o desempenho.
+.vite/
+.npm/
+.eslintcache
+.stylelintcache
+
+# Relatórios de cobertura de testes
+# Gerados ao executar testes com a opção de cobertura.
+/coverage
+
+# Arquivos de configuração de editores
+# Cada desenvolvedor pode ter configurações de editor diferentes.
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Arquivos de sistema operacional
+# Arquivos de metadados específicos do sistema operacional.
+.DS_Store
+Thumbs.db
+
+# Arquivos de build do TypeScript
+# Se você estiver usando TypeScript, o compilador pode gerar este arquivo.
+.tsbuildinfo
