@@ -1,25 +1,16 @@
 import { Router } from "express";
+import { createAppointment, deleteAppointment, getAppointment, getAppointments, updateAppointment } from "../controllers/appointment.controller.js";
 
 const appointmentRouter = Router();
 
-appointmentRouter.get("/", (req, res) => {
-  res.send({title: "Get all appointments"});
-});
+appointmentRouter.get("/", getAppointments);
 
-appointmentRouter.get("/:id", (req, res) => {
-  res.send({title: `Get appointment with ID: ${req.params.id}`});
-});
+appointmentRouter.get("/:id", getAppointment);
 
-appointmentRouter.post("/", (req, res) => {
-  res.send({title: "Create a new appointment"});
-});
+appointmentRouter.post("/", createAppointment);
 
-appointmentRouter.put("/:id", (req, res) => {
-  res.send({title: `Update appointment with ID: ${req.params.id}`});
-});
+appointmentRouter.put("/:id", updateAppointment);
 
-appointmentRouter.delete("/:id", (req, res) => {
-  res.send({title: `Delete appointment with ID: ${req.params.id}`});
-});
+appointmentRouter.delete("/:id", deleteAppointment);
 
 export default appointmentRouter;
