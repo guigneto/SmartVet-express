@@ -6,6 +6,7 @@ import connectToDatabase from './database/mongodb.js';
 
 import userRouter from './routes/user.routes.js';
 import animalRouter from './routes/animal.routes.js';
+import appointmentRouter from './routes/appointment.routes.js';
 import authRouter from './routes/auth.routes.js';
 import errorMiddleware from './middlewares/error.middleware.js';
 import authorize from './middlewares/auth.middleware.js';
@@ -20,6 +21,7 @@ app.use('/api/SmartVet/auth',authRouter);
 
 app.use('/api/SmartVet/users', userRouter);
 app.use('/api/SmartVet/animals',authorize, animalRouter);
+app.use('/api/SmartVet/appointments', authorize, appointmentRouter);
 
 app.use(errorMiddleware);
 
