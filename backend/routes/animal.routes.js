@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createAnimal, getAnimal, getAnimals } from "../controllers/animal.controller.js";
+import { createAnimal, deleteAnimal, getAnimal, getAnimals, updateAnimal } from "../controllers/animal.controller.js";
 
 const animalRouter = Router();
 
@@ -9,12 +9,8 @@ animalRouter.get("/:id", getAnimal);
 
 animalRouter.post("/", createAnimal);
 
-animalRouter.put("/:id", (req, res) => {
-  res.send({title: `Update animal with ID: ${req.params.id}`});
-});
+animalRouter.put("/:id", updateAnimal);
 
-animalRouter.delete("/:id", (req, res) => {
-  res.send({title: `Delete animal with ID: ${req.params.id}`});
-});
+animalRouter.delete("/:id", deleteAnimal);
 
 export default animalRouter;

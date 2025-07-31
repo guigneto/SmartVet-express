@@ -48,3 +48,50 @@ export const createAnimal = async (req, res, next) => {
     }
     
 }
+
+export const updateAnimal = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { name, species, breed, birthYear, weight } = req.body;
+
+        const updatedAnimal = await Animal.findByIdAndUpdate(
+            id,
+            { name, species, breed, birthYear, weight },
+            { new: true }
+        );
+
+        if (!updatedAnimal) {
+            const error = new Error("Animal not found");
+            error.statusCode = 404;
+            throw error;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Animal updated successfully",
+            data: updatedAnimal
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+export const deleteAnimal = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        const deletedAnimal = await Animal.findByIdAndDelete(id);
+
+        if (!deletedAnimal) {
+            const error = new Error("Animal not found");
+            error.statusCode = 404;
+            throw error;
+        }
+
+        res.status(200).json({
+            success: true,
+            message: "Animal deleted successfully"
+        });
+    } catch (error) {
+        next(error);
+    }
+}
