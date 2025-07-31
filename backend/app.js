@@ -7,7 +7,9 @@ import connectToDatabase from './database/mongodb.js';
 import userRouter from './routes/user.routes.js';
 import animalRouter from './routes/animal.routes.js';
 import authRouter from './routes/auth.routes.js';
+import errorMiddleware from './middlewares/error.middleware.js';
 import authorize from './middlewares/auth.middleware.js';
+
 const app = express();
 
 app.use(express.json());
@@ -18,6 +20,9 @@ app.use('/api/SmartVet/auth',authRouter);
 
 app.use('/api/SmartVet/users', userRouter);
 app.use('/api/SmartVet/animals',authorize, animalRouter);
+
+app.use(errorMiddleware);
+
 app.get('/', (req, res) => {
   res.send('Welcome to the SmartVet API');
 });
