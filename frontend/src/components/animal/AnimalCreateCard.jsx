@@ -10,11 +10,11 @@ import {
 
 function AnimalCreateForm({ initialAnimal = {}, onSave, onCancel }) {
     const [form, setForm] = useState({
-        animal_name: initialAnimal.animal_name || '',
-        specie: initialAnimal.specie || '',
+        name: initialAnimal.name || '',
+        species: initialAnimal.species || '',
         breed: initialAnimal.breed || '',
         weight: initialAnimal.weight || 0,
-        birth_year: initialAnimal.birth_year || new Date().getFullYear(),
+        birthYear: initialAnimal.birthYear || new Date().getFullYear(),
     });
 
     const handleChange = (e) => {
@@ -32,8 +32,8 @@ function AnimalCreateForm({ initialAnimal = {}, onSave, onCancel }) {
           <FormRow>
             <FormLabel>Nome:</FormLabel>
             <FormInput
-              name="animal_name"
-              value={form.animal_name}
+              name="name"
+              value={form.name}
               onChange={handleChange}
               required
             />
@@ -42,8 +42,8 @@ function AnimalCreateForm({ initialAnimal = {}, onSave, onCancel }) {
           <FormRow>
             <FormLabel>Espécie:</FormLabel>
             <FormInput
-              name="specie"
-              value={form.specie}
+              name="species"
+              value={form.species}
               onChange={handleChange}
               required
             />
@@ -74,8 +74,8 @@ function AnimalCreateForm({ initialAnimal = {}, onSave, onCancel }) {
             <FormLabel>Ano de Nasc.:</FormLabel>
             <FormInput
               type="number"
-              name="birth_year"
-              value={form.birth_year}
+              name="birthYear"
+              value={form.birthYear}
               onChange={handleChange}
               min="1900"
               max={new Date().getFullYear()}

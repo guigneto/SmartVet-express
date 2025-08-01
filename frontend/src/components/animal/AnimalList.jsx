@@ -11,13 +11,6 @@ function AnimalList() {
   const [creating, setCreating] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [filter, setFilterSection] = useState(false)
-  const [filterInputs, setFilterInputs] = useState({
-    name: '',
-    breed: '',
-    specie: '',
-    birth_year: '',
-    weight: ''
-  })
   const [filters, setFilters] = useState({
     name: '',
     breed: '',
@@ -42,40 +35,37 @@ function AnimalList() {
   }, []);
 
   const searchedAnimals = animals.filter(animal =>
-    animal?.animal_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    animal?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     animal?.breed?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    animal?.specie?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    String(animal?.birth_year) === String(searchTerm) ||
+    animal?.species?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    String(animal?.birthYear) === String(searchTerm) ||
     String(animal?.weight) === searchTerm
   );
 
   const filteredAnimals = useMemo(() => {
-    return animals.filter((a) =>
-      (!filters.name ||
-        a.animal_name.toLowerCase().includes(filters.name.toLowerCase())) &&
-      (!filters.breed ||
-        a.breed.toLowerCase().includes(filters.breed.toLowerCase())) &&
-      (!filters.specie ||
-        a.specie.toLowerCase().includes(filters.specie.toLowerCase())) &&
-      (!filters.birth_year ||
-        String(a.birth_year) === String(filters.birth_year)) &&
-      (!filters.weight || String(a.weight) === String(filters.weight))
-    );
+    return animals.filter((a) => {
+      const nameMatch = !filters.name || a.name?.toLowerCase().includes(filters.name.toLowerCase());
+      const breedMatch = !filters.breed || a.breed?.toLowerCase().includes(filters.breed.toLowerCase());
+      const speciesMatch = !filters.specie || a.species?.toLowerCase().includes(filters.specie.toLowerCase());
+      const birthYearMatch = !filters.birth_year || String(a.birthYear) === String(filters.birth_year);
+      const weightMatch = !filters.weight || String(a.weight) === String(filters.weight);
+      return nameMatch && breedMatch && speciesMatch && birthYearMatch && weightMatch;
+    });
   }, [animals, filters]);
 
   if (loading) return <p>Carregando...</p>;
 
   const handleUpdated = (updated) =>
     setAnimals((prev) =>
-      prev.map((a) => (a.id === updated.id ? updated : a))
+      prev.map((a) => (a._id === updated._id ? updated : a))
     );
 
-  const handleDeleted = (id) =>
-    setAnimals((prev) => prev.filter((a) => a.id !== id));
+  const handleDeleted = (_id) =>
+    setAnimals((prev) => prev.filter((a) => a._id !== _id));
 
   const handleCreated = async (createdAnimal) => {
     try {
-      const animal = new Animal({ id: createdAnimal.id, animal_name: createdAnimal.animal_name, specie: createdAnimal.specie, breed: createdAnimal.breed, birth_year: createdAnimal.birth_year, weight: createdAnimal.weight })
+      const animal = new Animal({ _id: createdAnimal._id, name: createdAnimal.name, species: createdAnimal.species, breed: createdAnimal.breed, birthYear: createdAnimal.birthYear, weight: createdAnimal.weight })
       await AnimalCreate(animal);
       const data = await AnimalGetAll();
       setAnimals(data);
@@ -95,29 +85,13 @@ function AnimalList() {
   const handleFilterButton = () => {
     setFilterSection(!filter)
   }
-  const handleInputChange = (e) =>
-    setFilterInputs((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-
-  const handleApplyFilters = () => {
-    setFilters(filterInputs);
-  };
 
   const handleClearFilters = () => {
-    setFilterInputs({
-      name: '',
-      breed: '',
-      specie: '',
-      birth_year: '',
-      weight: ''
-    });
     setFilters({
       name: '',
       breed: '',
-      specie: '',
-      birth_year: '',
+      species: '',
+      birthYear: '',
       weight: ''
     });
 
@@ -159,7 +133,7 @@ function AnimalList() {
             <FilterInput
               name="specie"
               placeholder="Filtrar por espécie"
-              value={filters.specie}
+              value={filters.species}
               onChange={handleFilterChange}
               className="input"
             />
@@ -185,7 +159,7 @@ function AnimalList() {
               name="birth_year"
               placeholder="Filtrar por ano de nascimento"
               type="number"
-              value={filters.birth_year}
+              value={filters.birthYear}
               onChange={handleFilterChange}
               className="input"
             />
@@ -212,16 +186,14 @@ function AnimalList() {
         </Modal>
       )}
 
-      {/* {animals.map((animal) => (
-        <AnimalCard key={animal.id} animal={animal} onUpdate={handleUpdated} onDelete={handleDeleted} />
-      ))} */}
+  
       <AnimalCardDiv>
         {(filteredAnimals.length === 0) ? (
           <p>Nenhum animal encontrado.</p>
         ) : (filter && (
           filteredAnimals.map((animal) => (
             <AnimalCard
-              key={animal.id}
+              key={animal._id}
               animal={animal}
               onUpdate={handleUpdated}
               onDelete={handleDeleted}
@@ -234,7 +206,7 @@ function AnimalList() {
         {!filter &&
           searchedAnimals.map((animal) => (
             <AnimalCard
-              key={animal.id}
+              key={animal._id}
               animal={animal}
               onUpdate={handleUpdated}
               onDelete={handleDeleted}

@@ -10,8 +10,8 @@ export function AnimalCard({ animal, onUpdate, onDelete }) {
 
   const handleSave = async (updatedAnimal) => {
     try {
-      const animal = new Animal({id: updatedAnimal.id, animal_name: updatedAnimal.animal_name, specie: updatedAnimal.specie, breed: updatedAnimal.breed, birth_year: updatedAnimal.birth_year, weight: updatedAnimal.weight})
-      const response = await AnimalUpdate(animal.id, animal)
+      const animal = new Animal({_id: updatedAnimal._id, name: updatedAnimal.name, species: updatedAnimal.species, breed: updatedAnimal.breed, birthYear: updatedAnimal.birthYear, weight: updatedAnimal.weight})
+      const response = await AnimalUpdate(animal._id, animal)
       onUpdate?.(updatedAnimal);        // avisa o pai (opcional)
       setIsEditing(false);
 
@@ -25,8 +25,8 @@ export function AnimalCard({ animal, onUpdate, onDelete }) {
     if (!window.confirm('Tem certeza que deseja excluir este animal?')) return;
     try {
       // await animalService.delete(animal.id);
-      const response = await AnimalDelete(animal.id)
-      onDelete?.(animal.id);            // avisa o pai (opcional)
+      const response = await AnimalDelete(animal._id)
+      onDelete?.(animal._id);            // avisa o pai (opcional)
     } catch (err) {
       console.error('Erro ao excluir animal', err);
     }
@@ -45,11 +45,11 @@ export function AnimalCard({ animal, onUpdate, onDelete }) {
   return (
     <Card>
       <AnimalInfo>
-        <AnimalName>{animal.animal_name}</AnimalName>
-        <AnimalSpecie>Espécie: {animal.specie}</AnimalSpecie>
+        <AnimalName>{animal.name}</AnimalName>
+        <AnimalSpecie>Espécie: {animal.species}</AnimalSpecie>
         <AnimalBreed>Raça: {animal.breed}</AnimalBreed>
         <AnimalWeight>Peso: {animal.weight}kg</AnimalWeight>
-        <AnimalBirthYear>Ano de Nascimento: {animal.birth_year}</AnimalBirthYear>
+        <AnimalBirthYear>Ano de Nascimento: {animal.birthYear}</AnimalBirthYear>
       </AnimalInfo>
 
       <Actions>

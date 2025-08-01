@@ -33,19 +33,19 @@ const animalService = {
 
 // Classe animal para facilitar o uso
 export class Animal{
-    animal_name
-    birth_year
+    _id
+    name
+    species
     breed
-    id
-    specie
+    birthYear
     weight
 
-    constructor({ id, animal_name, specie, breed, birth_year, weight }) {
-        this.id = id,
-        this.animal_name = animal_name,
-        this.specie = specie,
+    constructor({ _id, name, species, breed, birthYear, weight }) {
+        this._id = _id,
+        this.name = name,
+        this.species = species,
         this.breed = breed,
-        this.birth_year = birth_year,
+        this.birthYear = birthYear,
         this.weight = weight
     }
 
@@ -55,12 +55,12 @@ export class Animal{
 
     toJsonWithId() {
         return {
-            id: this.id,
-            animal_name: this.animal_name,
-            specie: this.specie,
+            _id: this._id,
+            name: this.name,
+            species: this.species,
             breed: this.breed,
             weight: this.weight,
-            birth_year: this.birth_year
+            birthYear: this.birthYear
         }
     }
 
