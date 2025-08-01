@@ -1,6 +1,6 @@
 import api from "./api"
 
-const endpoint = `/SmartVet/Apointment`
+const endpoint = `/SmartVet/appointments`
 
 export const atendimentoService = {
     async getAll() {

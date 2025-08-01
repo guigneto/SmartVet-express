@@ -1,6 +1,6 @@
 import api from "./api"
 
-const endpoint = `/SmartVet/Animal`
+const endpoint = `/SmartVet/animals`
 
 const animalService = {
     async getAll() {
