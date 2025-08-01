@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 // Certifique-se que o caminho para sua imagem está correto!
 import SmartVetGato from '../imgs/gato.png';
-import { signIn } from '../services/AuthService';
+import { signUp } from '../services/AuthService';
 
 // Paleta de cores para consistência
 const colors = {
@@ -152,19 +152,17 @@ const GraphicImage = styled.img`
 `;
 
 
-// -------------------- COMPONENT --------------------
-
-function LoginPage() {
+function RegistroPage() {
   const [form, setForm] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signIn(form);
-      navigate('/home');
+      await signUp(form);
+      navigate('/');
     } catch (err) {
-      alert(err.message || 'Erro ao fazer login');
+      alert(err.message || 'Erro ao fazer registro');
     }
   };
 
@@ -172,26 +170,33 @@ function LoginPage() {
     <PageContainer>
       <LoginWrapper>
         <FormPanel>
-          <Title>Bem Vindo!</Title>
+          <Title>Crie sua conta</Title>
           <form onSubmit={handleSubmit}>
+            <Input
+              type="name"
+              placeholder="Nome"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required 
+            />
             <Input
               type="email"
               placeholder="Email"
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
-              required /* Torna o campo obrigatório */
+              required
             />
             <Input
               type="password"
               placeholder="Senha"
               value={form.password}
               onChange={(e) => setForm({ ...form, password: e.target.value })}
-              required /* Torna o campo obrigatório */
+              required
             />
             <OptionsWrapper>
-              <StyledLink href="/registrar">Registre-se</StyledLink>
+              <StyledLink href="/">Faça Login</StyledLink>
             </OptionsWrapper>
-            <LoginButton type="submit">Login</LoginButton>
+            <LoginButton type="submit">Registrar</LoginButton>
           </form>
         </FormPanel>
 
@@ -204,4 +209,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default RegistroPage;
