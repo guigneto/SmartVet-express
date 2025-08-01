@@ -66,21 +66,21 @@ const Button = styled.button`
 `;
 
 const AtendimentoCard = ({ animal, atendimento, onRegistrar }) => {
-  const { urgency, scheduledDate } = atendimento;
-
+  const  urgency  = atendimento.urgency;
+  
   return (
     <Card $urgency={urgency}>
       <Info>
-        <AnimalName>{animal.animal_name}</AnimalName>
-        <Detail><strong>Espécie:</strong> {animal.specie}</Detail>
+        <AnimalName>{animal.name}</AnimalName>
+        <Detail><strong>Espécie:</strong> {animal.species}</Detail>
         <Detail><strong>Peso:</strong> {animal.weight} kg</Detail>
-        {/* <DateLabel>Agendado para: {new Date(scheduledDate).toLocaleString('pt-BR')}</DateLabel> */}
+        {/* <DateLabel>Agendado para: {new Date(date).toLocaleString('pt-BR')}</DateLabel> */}
         <Urgency urgency={urgency}>
           {['Baixa', 'Média', 'Alta', 'Urgente'][urgency] || 'Desconhecida'}
         </Urgency>
       </Info>
 
-      <Button onClick={() => onRegistrar(atendimento.id)}>
+      <Button onClick={() => onRegistrar(atendimento._id)}>
         Registrar <br />Atendimento
       </Button>
     </Card>

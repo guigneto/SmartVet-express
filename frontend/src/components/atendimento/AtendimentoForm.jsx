@@ -32,9 +32,9 @@ const ButtonContainer = styled.div`
 
 function AtendimentoForm({ animals, onSave, onCancel }) {
   const [form, setForm] = useState({
-    scheduled_date: '',
+    date: '',
     urgency: '',
-    result_description: '',
+    description: '',
     animalId: '',
   });
 
@@ -58,7 +58,7 @@ function AtendimentoForm({ animals, onSave, onCancel }) {
         <FormInput as="select" id="animalId" name="animalId" onChange={handleChange} value={form.animalId} required>
           <option value="">Selecione um animal</option>
           {animals.map((a) => (
-            <option key={a.id} value={a.id}>{a.animal_name}</option>
+            <option key={a._id} value={a._id}>{a.name}</option>
           ))}
         </FormInput>
       </FormRow>
@@ -75,8 +75,8 @@ function AtendimentoForm({ animals, onSave, onCancel }) {
       </FormRow>
 
       <FormRow>
-        <FormLabel htmlFor="scheduled_date">Data do Atendimento:</FormLabel>
-        <FormInput type="datetime-local" id="scheduled_date" name="scheduled_date" onChange={handleChange} value={form.scheduled_date} required />
+        <FormLabel htmlFor="date">Data do Atendimento:</FormLabel>
+        <FormInput type="datetime-local" id="date" name="date" onChange={handleChange} value={form.date} required />
       </FormRow>
 
 

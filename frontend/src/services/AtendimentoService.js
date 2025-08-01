@@ -5,7 +5,7 @@ const endpoint = `/SmartVet/appointments`
 export const atendimentoService = {
     async getAll() {
         const response = await api.get(endpoint);
-        return response.data.map(item => new Appointment(item));
+        return response.data.data.map(item => new Appointment(item));
     },
 
     async getById(id) {
@@ -42,33 +42,33 @@ export const atendimentoService = {
 
 //lembrar de ajustar os nomes dos campos para o padrão do Swagger
 export class Appointment {
-    constructor({ id, scheduled_date, urgency, result_description, animalId, apointmentAnimalId }) {
-  this.id = id;
-  this.scheduledDate = new Date(scheduled_date);
+    constructor({ _id, date, urgency, description, animalId, appointmentAnimalId }) {
+  this._id = _id;
+  this.date = new Date(date);
   this.urgency = urgency;
-  this.resultDescription = result_description;
-  this.animalId = animalId ?? apointmentAnimalId; 
+  this.description = description;
+  this.animalId = animalId ?? appointmentAnimalId;
 }
 
     get formattedDate() {
-        return this.scheduledDate.toLocaleString('pt-BR');
+        return this.date.toLocaleString('pt-BR');
     }
 
     toJsonWithId() {
         return {
-            id: this.id,
-            scheduled_date: this.scheduledDate.toISOString(),
+            _id: this._id,
+            date: this.date.toISOString(),
             urgency: this.urgency,
-            result_description: this.resultDescription,
+            description: this.description,
             animalId: this.animalId
         };
     }
 
     toJsonWithoutId() {
         return {
-            scheduled_date: this.scheduledDate.toISOString(),
+            date: this.date.toISOString(),
             urgency: this.urgency,
-            result_description: this.resultDescription,
+            description: this.description,
             animalId: this.animalId
         };
     }

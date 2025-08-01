@@ -134,7 +134,7 @@ export function AtendimentoList() {
   const [atendimentoSelecionado, setAtendimentoSelecionado] = useState(null);
   const [descricaoResultado, setDescricaoResultado] = useState('');
 
-  const naoAtendidos = atendimentos.filter(atendimento => !atendimento.resultDescription); 
+  const naoAtendidos = atendimentos.filter(atendimento => !atendimento.description); 
 
   const fetchData = async () => { //pega os dados do backend
     setLoading(true);
@@ -158,9 +158,9 @@ export function AtendimentoList() {
   const handleNovoAtendimento = async (formData) => {
     try {
       const appointment = new Appointment({
-        scheduled_date: formData.scheduled_date,
+        date: formData.date,
         urgency: parseInt(formData.urgency), // só para garantir que é número
-        result_description: formData.result_description,
+        description: formData.description,
         animalId: formData.animalId
       });
 
@@ -174,10 +174,10 @@ export function AtendimentoList() {
   };
 
   const onRegistrar = (id) => {
-    const atendimento = atendimentos.find(a => a.id === id);
+    const atendimento = atendimentos.find(a => a._id === id);
     if (atendimento) {
       setAtendimentoSelecionado(atendimento); //abre modal
-      setDescricaoResultado(atendimento.resultDescription || ''); //preenche descricao se existir no banco
+      setDescricaoResultado(atendimento.description || ''); //preenche descricao se existir no banco
     }
   };
 
@@ -185,14 +185,14 @@ export function AtendimentoList() {
     try {
       //parametro: atributos que o backend espera (melhorar isso no service)
       const atualizado = new Appointment({
-        id: atendimentoSelecionado.id,
-        scheduled_date: atendimentoSelecionado.scheduledDate, 
+        _id: atendimentoSelecionado._id,
+        date: atendimentoSelecionado.date,
         urgency: atendimentoSelecionado.urgency,
-        result_description: descricaoResultado,
+        description: descricaoResultado,
         animalId: atendimentoSelecionado.animalId
       });
 
-      await AtendimentoUpdate(atendimentoSelecionado.id, atualizado);
+      await AtendimentoUpdate(atendimentoSelecionado._id, atualizado);
 
       // atualiza a lista após salvar
       const atualizados = await AtendimentoGetAll();
@@ -219,7 +219,7 @@ export function AtendimentoList() {
       </Modal>
       <Modal isOpen={!!atendimentoSelecionado} onClose={() => setAtendimentoSelecionado(null)}>
         <AtendimentoUpdateForm
-          animal={animals.find(a => a.id === atendimentoSelecionado?.animalId)}
+          animal={animals.find(a => a._id === atendimentoSelecionado?.animalId)}
           atendimento={atendimentoSelecionado}
           descricao={descricaoResultado}
           onChangeDescricao={setDescricaoResultado}
@@ -242,14 +242,14 @@ export function AtendimentoList() {
         [...atendimentos]
           .sort((a, b) => {
             if (a.urgency !== b.urgency) return b.urgency - a.urgency;
-            return new Date(a.scheduled_date) - new Date(b.scheduled_date);
+            return new Date(a.date) - new Date(b.date);
           })
           .map(atendimento => {
-            const animal = animals.find(a => a.id === atendimento.animalId);
-            if ((atendimento.resultDescription) !== "") return null; // não renderiza se já tiver resultado
+            const animal = animals.find(a => a._id === atendimento.animalId);
+            if ((atendimento.description) !== "") return null; // não renderiza se já tiver resultado
             return (
               <AtendimentoCard
-                key={atendimento.id}
+                key={atendimento._id}
                 animal={animal}
                 atendimento={atendimento}
                 onRegistrar={onRegistrar}

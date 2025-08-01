@@ -44,7 +44,7 @@ const AtendimentoUpdateForm = ({ animal, atendimento, descricao, onChangeDescric
   return (
     <FormWrapper>
       <h2>Registrar Atendimento</h2>
-      <p><strong>Animal:</strong> {animal?.animal_name ?? 'Desconhecido'}</p>
+      <p><strong>Animal:</strong> {animal?.name ?? 'Desconhecido'}</p>
 
       <Label>Descrição do Resultado:</Label>
       <TextArea
