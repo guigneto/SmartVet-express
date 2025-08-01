@@ -26,11 +26,8 @@ export const signUp = async (formData) => {
 
 export const signIn = async (formData) => {
   const response = await api.post(`${endpoint}/sign-in`, formData);
-  console.log("response", response.data);
   const token = response.data.data.token;
   if (token) setToken(token);
-  console.log("token", token);
-  console.log("localStorage", localStorage);
   return response.data;
 };
 

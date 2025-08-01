@@ -5,12 +5,12 @@ const endpoint = `/SmartVet/animals`
 const animalService = {
     async getAll() {
         const response = await api.get(endpoint);
-        return response.data.map(animalData => new Animal(animalData));
+        return response.data.data.map(animalData => new Animal(animalData));
     },
 
     async getById(id) {
         const response = await api.get(`${endpoint}/${id}`);
-        return new Animal(response.data);
+        return new Animal(response.data.data);
     },
 
     async create(animal) {
@@ -66,11 +66,11 @@ export class Animal{
 
     toJsonWithoutId() {
         return {
-            animal_name: this.animal_name,
-            specie: this.specie,
+            name: this.name,
+            species: this.species,
             breed: this.breed,
             weight: this.weight,
-            birth_year: this.birth_year
+            birthYear: this.birthYear
         }
     }
 }
