@@ -17,8 +17,13 @@ const appointmentSchema = new mongoose.Schema({
         ref: "Animal",
         required: true,
         index: true // Ensures fast lookups by animalId
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now,
+        expires: 86400 // 24 horas (86400 segundos)
     }
-},{timestamps:true});
+});
 
 const Appointment = mongoose.model("Appointment", appointmentSchema);
 

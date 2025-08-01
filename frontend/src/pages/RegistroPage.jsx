@@ -67,7 +67,7 @@ const Title = styled.h1`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 95%;
   padding: 15px 20px;
   margin-bottom: 20px;
   border: 1px solid #ddd; /* Borda mais suave */
@@ -110,9 +110,10 @@ const StyledLink = styled.a`
 
 const LoginButton = styled.button`
   width: 100%;
+  margin-left: 10px;
   padding: 18px; /* Mais padding para o botão */
   background-color: ${colors.secondaryOrange}; /* Laranja vibrante */
-  color: white;
+  color: white;;
   border: none;
   border-radius: 10px; /* Cantos arredondados */
   font-size: 1.25rem; /* Fonte um pouco maior */

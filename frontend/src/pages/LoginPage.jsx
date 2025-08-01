@@ -57,7 +57,7 @@ const FormPanel = styled.div`
 
 const Title = styled.h1`
   font-size: 3.5rem;
-  font-weight: 400;
+  font-weight: 600;
   margin: auto;
   margin-bottom: 40px; /* Mais espaço abaixo do título */
   color: ${colors.darkGray};
@@ -67,7 +67,7 @@ const Title = styled.h1`
 `;
 
 const Input = styled.input`
-  width: 100%;
+  width: 95%;
   padding: 15px 20px;
   margin-bottom: 20px;
   border: 1px solid #ddd; /* Borda mais suave */
@@ -110,6 +110,7 @@ const StyledLink = styled.a`
 
 const LoginButton = styled.button`
   width: 100%;
+  margin-left: 10px;
   padding: 18px; /* Mais padding para o botão */
   background-color: ${colors.secondaryOrange}; /* Laranja vibrante */
   color: white;

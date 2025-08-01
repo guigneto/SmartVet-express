@@ -34,7 +34,7 @@ export const signIn = async (formData) => {
 export const signOut = () => {
   clearToken();
   // Redirecionamento opcional
-  window.location.href = '/login';
+  window.location.href = '/';
 };
 
 export const isAuthenticated = () => {

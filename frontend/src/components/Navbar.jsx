@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 // Importe sua imagem da logo
 import SmartPetLogo from '../imgs/logo.png'; // Ajuste o caminho conforme onde sua imagem estiver
+import { FiLogOut } from 'react-icons/fi';
+import { signOut } from '../services/AuthService';
 
 // Paleta de cores para consistência
 const colors = {
@@ -103,9 +105,62 @@ const NavButton = styled(Link)`
   }
 `;
 
+const LogoutButton = styled.button`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  margin-top: auto;
+  padding: 18px 25px;
+  margin-bottom: 12px;
+  background-color: transparent;
+  color: ${props => props.active ? '#e74c3c' : '#ecf0f1'};
+  font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleY(${props => props.active ? '1' : '0'});
+    width: 6px;
+    height: 80%;
+    background-color: #e74c3c; /* vermelho mais suave */
+    border-radius: 0 3px 3px 0;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover {
+    background-color: rgba(41, 128, 185, 0.15); /* azul claro translúcido */
+    color: #e74c3c;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+`;
+
 function Navbar() {
   // Hook para obter a localização atual
   const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    signOut(); // limpa token + redireciona
+    navigate('/'); // ou '/' se for a home pública
+  };
 
   return (
     <NavContainer>
@@ -127,6 +182,10 @@ function Navbar() {
     
       {/* Você pode adicionar mais botões aqui, seguindo o mesmo padrão */}
 
+      <LogoutButton onClick={handleLogout}>
+        <FiLogOut size={20} />
+        Sair
+      </LogoutButton>
     </NavContainer>
   );
 }

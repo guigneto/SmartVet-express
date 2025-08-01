@@ -20,6 +20,11 @@ const animalSchema = new mongoose.Schema({
     weight:{
         type: Number,
         required: true
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now,
+        expires: 86400 // 24 horas (86400 segundos)
     }
 });
 
