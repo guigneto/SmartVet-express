@@ -35,3 +35,7 @@ Este é um sistema completo para clínicas veterinárias realizarem o **cadastro
     ```bash
     npm run dev
     ```
+5. Acesse a aplicação no navegador:
+    ```
+    http://localhost:5173/
+    ```
