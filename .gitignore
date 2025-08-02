@@ -17,8 +17,7 @@ yarn-error.log*
 Thumbs.db
 
 # Ambiente
-.env
-/backend/.env
+
 /frontend/.env
 
 # VSCode
