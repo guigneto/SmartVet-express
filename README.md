@@ -2,6 +2,10 @@
 
 Este é um sistema completo para clínicas veterinárias realizarem o **cadastro de animais** e o **gerenciamento da fila de atendimentos**. O projeto inclui frontend em **React** e backend em **Node.js/Express** com banco de dados **MongoDB**.
 
+![alt text](/images/image.png)
+
+![alt text](/images/image-1.png)
+
 ## 🚀 Funcionalidades
 - Autenticação de usuários (JWT)
 - Cadastro de animais com dados detalhados
