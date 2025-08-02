@@ -22,12 +22,6 @@ export const signUp = async (req, res, next) => {
             throw error;
         };
 
-        if(password.length <6){
-            const error = new Error('Password must be at least 6 characters long');
-            error.statusCode = 400;
-            throw error;
-        }
-
         if(!name || !email || !password){
             const error = new Error('Name, email and password are required');
             error.statusCode = 400;

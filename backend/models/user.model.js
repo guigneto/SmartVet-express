@@ -19,9 +19,13 @@ const userSchema = new mongoose.Schema({
     password:{
         type: String,
         required: [true,"User password is required"],
-        minlength: [6,"Password must be at least 6 characters long"],
     },
-}, { timestamps: true });
+    createdAt:{
+        type: Date,
+        default: Date.now,
+        expires: 86400 // 24 horas (86400 segundos)
+    }
+});
 
 const User = mongoose.model("User", userSchema);
 
